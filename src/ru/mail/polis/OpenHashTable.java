@@ -90,10 +90,11 @@ public class OpenHashTable<E extends Comparable<E>> implements ISet<E> {
     public boolean add(E value) {
         if(value.equals(deleted))
             return false;
+        if(contains(value))
+            return false;
         int key = value.hashCode();
         int prob;
         int h = hash1(key);
-        System.out.println("HASH 1 = "+h);
         if (insert(value, h)) {
             tableSize++;
             if(loadFactor())
@@ -102,7 +103,6 @@ public class OpenHashTable<E extends Comparable<E>> implements ISet<E> {
         }
         else {
             int h2 = hash2(key);
-            System.out.println("HASH 2 = "+h2);
             for(prob = 1; prob<hashTable.length; prob++) {
                 int idx = h + h2*prob;
                 idx %= hashTable.length;
