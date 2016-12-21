@@ -103,9 +103,9 @@ public class AVLTree<E extends Comparable<E>> implements ISortedSet<E> {
         boolean found = false;
         while ((t != null) && !found) {
             E tValue = t.value;
-            if (val.compareTo(tValue) < 0)
+            if (compare(val, tValue) < 0)
                 t = t.left;
-            else if (val.compareTo(tValue) > 0)
+            else if (compare(val, tValue) > 0)
                 t = t.right;
             else {
                 found = true;
@@ -135,7 +135,7 @@ public class AVLTree<E extends Comparable<E>> implements ISortedSet<E> {
         if(t == null)
             return new Node(x);
 
-        int compareResult = x.compareTo(t.value);
+        int compareResult = compare(x, t.value);
 
         if(compareResult < 0)
             t.left = insert(x, t.left);
@@ -186,7 +186,7 @@ public class AVLTree<E extends Comparable<E>> implements ISortedSet<E> {
     private Node remove(E x, Node t) {
         if(t == null)
             return t;
-        int compareResult = x.compareTo(t.value);
+        int compareResult = compare(x, t.value);
         if(compareResult < 0)
             t.left = remove(x, t.left);
         else if(compareResult > 0)

@@ -106,12 +106,12 @@ public class RedBlackTree<E extends Comparable<E>> implements ISortedSet<E> {
         if (root == nil) {
             return nil;
         }
-        if (value.compareTo(t.value) < 0) {
+        if (compare(value, t.value) < 0) {
             if (t.left != nil) {
                 return contains(value, t.left);
             }
         } 
-        else if (value.compareTo(t.value) > 0) {
+        else if (compare(value, t.value) > 0) {
             if (t.right != nil) {
                 return contains(value, t.right);
             }
@@ -130,23 +130,27 @@ public class RedBlackTree<E extends Comparable<E>> implements ISortedSet<E> {
             root = node;
             node.color = BLACK;
             node.parent = nil;
-        } else {
+        }
+        else {
             node.color = RED;
             while (true) {
-                if (node.value.compareTo(temp.value) < 0) {
+                if (compare(node.value, temp.value) < 0) {
                     if (temp.left == nil) {
                         temp.left = node;
                         node.parent = temp;
                         break;
-                    } else {
+                    }
+                    else {
                         temp = temp.left;
                     }
-                } else if (node.value.compareTo(temp.value) >= 0) {
+                }
+                else if (compare(node.value, temp.value) >= 0) {
                     if (temp.right == nil) {
                         temp.right = node;
                         node.parent = temp;
                         break;
-                    } else {
+                    }
+                    else {
                         temp = temp.right;
                     }
                 }
@@ -372,7 +376,7 @@ public class RedBlackTree<E extends Comparable<E>> implements ISortedSet<E> {
     }
 
     private int compare(E v1, E v2) {
-        return comparator == nil ? v1.compareTo(v2) : comparator.compare(v1, v2);
+        return comparator == null ? v1.compareTo(v2) : comparator.compare(v1, v2);
     }
 
     @Override
