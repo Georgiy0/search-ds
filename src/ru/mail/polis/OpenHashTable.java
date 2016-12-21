@@ -5,7 +5,7 @@ import java.util.Arrays;
 //TODO: write code here
 public class OpenHashTable<E extends Comparable<E>> implements ISet<E> {
 
-    class Deleted extends Object{
+    class Deleted {
         @Override
         public String toString() {
             return "_deleted";

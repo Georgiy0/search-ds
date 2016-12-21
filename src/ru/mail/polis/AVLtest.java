@@ -19,7 +19,7 @@ public class AVLtest {
                 case 1:
                     System.out.println("input int: ");
                     input = sc.nextInt();
-                    Tree.add(input);
+                    System.out.println(Tree.add(input));
                     break;
                 case 2:
                     System.out.println("search int: ");

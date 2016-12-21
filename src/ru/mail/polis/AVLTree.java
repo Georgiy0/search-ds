@@ -123,8 +123,11 @@ public class AVLTree<E extends Comparable<E>> implements ISortedSet<E> {
 
     @Override
     public boolean add(E value) {
+        int tempSize = size;
         size++;
         root = insert(value, root);
+        if(tempSize == size)
+            return false;
         return true;
     }
 
@@ -173,7 +176,10 @@ public class AVLTree<E extends Comparable<E>> implements ISortedSet<E> {
 
     @Override
     public boolean remove(E value) {
+        int tempSize = size;
         root = remove(value, root);
+        if (tempSize == size)
+            return false;
         return true;
     }
 
@@ -186,7 +192,6 @@ public class AVLTree<E extends Comparable<E>> implements ISortedSet<E> {
         else if(compareResult > 0)
             t.right = remove(x, t.right);
         else if(t.left != null && t.right != null) {
-            size--;
             t.value = findMin(t.right).value;
             t.right = remove(t.value, t.right);
         }
